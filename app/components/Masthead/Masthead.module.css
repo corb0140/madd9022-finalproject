@@ -13,10 +13,6 @@
   flex-direction: column;
 }
 
-​.container--text {
-  width: min(45em, 100%);
-}
-
 .heading {
   color: var(--off-white-color);
   font-size: 6rem;

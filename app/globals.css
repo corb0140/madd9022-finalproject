@@ -107,33 +107,6 @@ select {
   }
 }
 
-/* ---------- Containers ---------- */
-
-.container {
-  width: min(65em, 100%);
-  margin: 0 auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-​.container--text {
-  width: min(45em, 100%);
-}
-
-/* ----- BTN ----- */
-.btn {
-  --btn-color: var(--dominant-color, black);
-  display: inline-block;
-  border: 0.125em solid var(--btn-color);
-  border-radius: 0.25em;
-  padding: 0.55em 1.5em 0.5em;
-  background-color: var(--btn-color);
-  color: #fff;
-  cursor: pointer;
-  text-decoration: none;
-  font-family: inherit;
-  font-size: inherit;
-}
-
 /* ---------- Typography ---------- */
 h1,
 h2,
