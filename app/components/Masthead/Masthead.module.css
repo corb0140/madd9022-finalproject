@@ -1,0 +1,30 @@
+.masthead {
+  background-color: var(--dominant-color);
+  padding: 2rem 0;
+}
+
+.container {
+  width: min(65em, 100%);
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  color: var(--off-white-color);
+  font-size: 6rem;
+  font-weight: 200;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.subheading {
+  color: var(--off-white-color);
+  font-size: 1.5rem;
+  font-weight: 200;
+  text-indent: 0.8rem;
+  margin: 0;
+}
