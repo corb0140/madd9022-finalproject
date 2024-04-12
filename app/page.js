@@ -1,11 +1,11 @@
+import Navbar from "./components/Navbar/Navbar";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <div>
-      <div>
-        <form action=""></form>
-      </div>
+      <Navbar />
+      <div></div>
     </div>
   );
 }
