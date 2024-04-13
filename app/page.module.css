@@ -3,6 +3,21 @@
   padding: 2rem 0;
 }
 
+.login {
+  --btn-color: var(--dominant-color, black);
+  display: inline-block;
+  border: none;
+  border-radius: 0.25em;
+  padding: 1em 12em;
+  background-color: var(--btn-color);
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
 /* FORM */
 .container {
   width: min(65em, 100%);
