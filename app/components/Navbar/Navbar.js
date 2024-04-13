@@ -1,6 +1,8 @@
 import styles from "./Navbar.module.css";
 
 import Link from "next/link";
+import { logout } from "@/app/actions";
+import { redirect } from "next/navigation";
 
 const Navbar = () => {
   return (
@@ -18,9 +20,17 @@ const Navbar = () => {
         <Link className={styles.link} href="/wiped">
           Wiped
         </Link>
-        <Link className={styles.link} href="">
-          Logout
-        </Link>
+
+        <form
+          action={async () => {
+            "use server";
+
+            await logout();
+            redirect("/");
+          }}
+        >
+          <button className={styles.logout}>Log out</button>
+        </form>
       </navbar>
     </div>
   );

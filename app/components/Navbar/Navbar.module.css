@@ -21,3 +21,18 @@
 .link:hover {
   color: var(--accent-color);
 }
+
+.logout {
+  background: none;
+  border: none;
+
+  color: var(--off-white-color);
+  text-decoration: none;
+  font-size: 1.4rem;
+  transition: 0.3s ease-in-out;
+}
+
+.logout:hover {
+  color: var(--accent-color);
+  cursor: pointer;
+}
