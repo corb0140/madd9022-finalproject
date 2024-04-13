@@ -1,7 +1,11 @@
 import Navbar from "./components/Navbar/Navbar";
 import styles from "./page.module.css";
+import { redirect } from "next/navigation";
 
 export default function Home() {
+  const redirectUrl = "http://localhost:3000/login";
+  const url = `https://madd9124-finalproject.onrender.com/auth/google?redirect_url=${redirectUrl}`;
+
   return (
     <div>
       <nav className={styles.nav}>
@@ -9,6 +13,17 @@ export default function Home() {
       </nav>
 
       <div className={styles.container}>
+        <form
+          action={async (formData) => {
+            "use server";
+            redirect(url);
+          }}
+        >
+          <button className={styles.login}>Login</button>
+        </form>
+      </div>
+
+      {/* <div className={styles.container}>
         <form className={styles.form} action="">
           <div className={styles.formBox}>
             <label className={styles.label} htmlFor="">
@@ -52,7 +67,7 @@ export default function Home() {
             <input className={styles.submit} type="submit" />
           </div>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 }
