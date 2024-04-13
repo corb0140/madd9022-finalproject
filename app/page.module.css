@@ -8,7 +8,8 @@
   display: inline-block;
   border: none;
   border-radius: 0.25em;
-  padding: 1em 12em;
+  padding: 1.5em 2em;
+  width: 70%;
   background-color: var(--btn-color);
   text-transform: uppercase;
   color: #fff;

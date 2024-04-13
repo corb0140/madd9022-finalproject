@@ -11,6 +11,12 @@
   align-items: center;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .link {
   color: var(--off-white-color);
   text-decoration: none;
