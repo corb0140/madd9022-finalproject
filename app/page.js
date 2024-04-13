@@ -1,4 +1,3 @@
-import Navbar from "./components/Navbar/Navbar";
 import styles from "./page.module.css";
 import { redirect } from "next/navigation";
 import { getSessions } from "@/app/actions";
@@ -11,10 +10,6 @@ export default async function Home() {
 
   return (
     <div>
-      <nav className={styles.nav}>
-        <Navbar token={token} />
-      </nav>
-
       {!token?.value && (
         <div className={styles.container}>
           <form
