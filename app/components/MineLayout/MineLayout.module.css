@@ -1,10 +1,22 @@
+/* .container {
+  width: min(85em, 100%);
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 2rem;
+} */
+
 .cardList {
   --cols: 1;
   display: grid;
   grid-template-columns: repeat(var(--cols), 1fr);
+
   gap: 1rem;
   margin: 0;
-  padding: 0.5rem 0.75rem;
+  padding: 0.35rem;
+  list-style: none;
+
+  overflow: hidden;
 }
 
 @media screen and (min-width: 45em) {
