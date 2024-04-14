@@ -3,8 +3,15 @@ import { redirect } from "next/navigation";
 import { getSessions } from "@/app/actions";
 
 export default async function Home() {
-  const redirectUrl = `${process.env.BASE_URL}login`;
-  const url = `https://madd9124-finalproject.onrender.com/auth/google?redirect_url=${redirectUrl}`;
+  const node_env =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:4000"
+      : "https://madd9124-finalproject.onrender.com";
+
+  const base_url = process.env.BASE_URL;
+
+  const redirectUrl = `${base_url}login`;
+  const url = `${node_env}/auth/google?redirect_url=${redirectUrl}`;
 
   let token = await getSessions();
 

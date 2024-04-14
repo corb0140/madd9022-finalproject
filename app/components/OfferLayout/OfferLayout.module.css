@@ -1,0 +1,59 @@
+/* FORM */
+.container {
+  width: min(65em, 100%);
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+}
+
+.form {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formBox {
+  border: 2px solid var(--dominant-color);
+  padding: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.label {
+  font-size: 1.2rem;
+  width: 20%;
+}
+
+.searchField {
+  width: 90%;
+  padding: 0.5rem 0.5rem;
+}
+
+.textarea {
+  width: 90%;
+  padding: 0.5rem 0.5rem;
+}
+
+.submit {
+  --btn-color: var(--dominant-color, black);
+  display: inline-block;
+  border: none;
+  border-radius: 0.25em;
+  padding: 1em 2.5em;
+  background-color: var(--btn-color);
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: inherit;
+
+  transition: background-color 0.4s;
+}
+
+.submit:hover {
+  background-color: var(--secondary-color);
+}

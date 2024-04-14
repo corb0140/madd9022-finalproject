@@ -9,7 +9,7 @@ const Navbar = ({ token }) => {
     <div className={styles.container}>
       {!token?.value && (
         <navbar className={`${styles.navbar} ${styles.center}`}>
-          <Link className={styles.link} href="/crap">
+          <Link className={styles.link} href="/">
             Search 4 Crap
           </Link>
         </navbar>
@@ -17,7 +17,7 @@ const Navbar = ({ token }) => {
 
       {token?.value && (
         <navbar className={styles.navbar}>
-          <Link className={styles.link} href="/crap">
+          <Link className={styles.link} href="/">
             Search 4 Crap
           </Link>
           <Link className={styles.link} href="/offer">
