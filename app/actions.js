@@ -1,13 +1,15 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import MineLayout from "./components/MineLayout/MineLayout";
 
 export async function login(response, token) {
   //set the cookie
-  console.log("login", token);
-  const expires = new Date(Date.now() + 30 * 1000); //this is the expiration date of the cookie
+
+  const expires = new Date(Date.now() + 3000 * 1000); //this is the expiration date of the cookie
 
   await response.cookies.set("token", token, {
     path: "/",
@@ -24,12 +26,6 @@ export async function logout() {
 export async function getSessions() {
   const token = await cookies().get("token");
 
-  console.log(
-    "getSession -",
-    token?.value,
-    token?.value ? "has cookie token" : "no cookie token"
-  );
-
   if (!token) return null;
   revalidatePath("/");
   return token;
@@ -42,7 +38,7 @@ export async function updateSession(request) {
   }
   if (!token) return;
 
-  const expires = new Date(Date.now() + 30 * 1000);
+  const expires = new Date(Date.now() + 3000 * 1000);
   const resp = NextResponse.next();
   resp.cookies.set({
     name: "token",
@@ -51,4 +47,53 @@ export async function updateSession(request) {
     expires: expires,
   });
   return resp;
+}
+
+export async function postCrap(form) {
+  "use server";
+
+  try {
+    let token = await getSessions();
+    let json = atob(token?.value.split(".")[1]);
+    let owner = JSON.parse(json);
+
+    const title = form.get("title");
+    const description = form.get("description");
+    const image = form.get("image");
+
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("images", image);
+    formData.append("owner", owner.id);
+    formData.append("location[coordinates][]", 23.33);
+    formData.append("location[coordinates][]", 43.45);
+    formData.append("status", "AVAILABLE");
+
+    console.log(formData);
+
+    const base_url =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:4000/api/crap"
+        : "https://madd9124-finalproject.onrender.com/api/crap";
+
+    const resp = await fetch(`${base_url}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token?.value}`,
+      },
+      body: formData,
+    });
+
+    const data = await resp.json();
+
+    return (
+      <div>
+        <MineLayout data={data} />
+      </div>
+    );
+  } catch (error) {
+    console.log(error);
+  }
 }

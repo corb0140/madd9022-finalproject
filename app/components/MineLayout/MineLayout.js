@@ -1,9 +1,9 @@
 import styles from "./MineLayout.module.css";
 
-const MineLayout = () => {
+const MineLayout = ({ data }) => {
   return (
     <div>
-      <div></div>
+      <div>{data}</div>
     </div>
   );
 };
