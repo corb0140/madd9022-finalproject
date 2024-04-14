@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import MineLayout from "./components/MineLayout/MineLayout";
@@ -12,7 +12,6 @@ export async function login(response, token) {
   const expires = new Date(Date.now() + 30 * 60 * 1000); //this is the expiration date of the cookie
 
   // cookie expires in 5 minutes
-
   await response.cookies.set("token", token, {
     path: "/",
     secure: process.env.NODE_ENV === "production",
@@ -69,8 +68,8 @@ export async function postCrap(form) {
     formData.append("description", description);
     formData.append("images", image);
     formData.append("owner", owner.id);
-    formData.append("location[coordinates][]", 23.33);
-    formData.append("location[coordinates][]", 43.45);
+    formData.append("location[coordinates][]", 63.33);
+    formData.append("location[coordinates][]", 33.45);
     formData.append("status", "AVAILABLE");
 
     console.log(formData);
@@ -90,12 +89,10 @@ export async function postCrap(form) {
 
     const data = await resp.json();
 
-    return (
-      <div>
-        <MineLayout data={data} />
-      </div>
-    );
+    console.log(data);
   } catch (error) {
     console.log(error);
+  } finally {
+    redirect("/mine");
   }
 }
