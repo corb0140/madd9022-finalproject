@@ -45,8 +45,20 @@ export default async function middleware(req) {
     }
     return response;
   }
+
+  //secret
+  if (req.nextUrl.pathname === "/offer") {
+    if (!response) {
+      response = NextResponse.next();
+    }
+
+    if (!req.cookies.has("token")) {   
+      return NextResponse.redirect(`${process.env.BASE_URL}`); //send the user back to '/' when they try to access this   
+    }
+    return response;
+  }
 }
 
 export const config = {
-  matcher: ["/", "/secret", "/login", "/logout"],
+  matcher: ["/", "/secret", "/login", "/logout", "/offer"],
 };

@@ -163,3 +163,8 @@ h5 {
     font-size: 1.953rem;
   }
 }
+
+nav {
+  background-color: var(--secondary-color);
+  padding: 2rem 0;
+}

@@ -4,16 +4,13 @@ import { redirect } from "next/navigation";
 import { getSessions } from "@/app/actions";
 
 export default async function Home() {
-  const redirectUrl = "http://localhost:3000/login";
+  const redirectUrl = `${process.env.BASE_URL}login`
   const url = `https://madd9124-finalproject.onrender.com/auth/google?redirect_url=${redirectUrl}`;
 
   let token = await getSessions();
 
   return (
     <div>
-      <nav className={styles.nav}>
-        <Navbar token={token} />
-      </nav>
 
       {!token?.value && (
         <div className={styles.container}>
