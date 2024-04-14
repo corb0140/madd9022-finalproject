@@ -1,0 +1,20 @@
+.cardList {
+  --cols: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: 1rem;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+}
+
+@media screen and (min-width: 45em) {
+  .cardList {
+    --cols: 2;
+  }
+}
+
+@media screen and (min-width: 60em) {
+  .cardList {
+    --cols: 3;
+  }
+}

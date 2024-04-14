@@ -1,9 +1,32 @@
 import MineLayout from "../components/MineLayout/MineLayout";
 
+import { getSessions } from "@/app/actions";
+
 export default async function page() {
-  return (
-    <div>
-      <MineLayout />
-    </div>
-  );
+  try {
+    let token = await getSessions();
+
+    const base =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/"
+        : "https://madd9022-finalproject.vercel.app/";
+
+    const resp = await fetch(`${base}api/mine?token=${token?.value}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token?.value}`,
+      },
+    });
+
+    const data = await resp.json();
+
+    return (
+      <div>
+        <MineLayout craps={data} />
+      </div>
+    );
+  } catch (error) {
+  } finally {
+    console.log("completed");
+  }
 }

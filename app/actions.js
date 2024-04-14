@@ -1,10 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import MineLayout from "./components/MineLayout/MineLayout";
 
 export async function login(response, token) {
   //set the cookie
@@ -71,8 +70,6 @@ export async function postCrap(form) {
     formData.append("location[coordinates][]", 63.33);
     formData.append("location[coordinates][]", 33.45);
     formData.append("status", "AVAILABLE");
-
-    console.log(formData);
 
     const base_url =
       process.env.NODE_ENV === "development"
