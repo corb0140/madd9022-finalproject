@@ -9,7 +9,9 @@ import MineLayout from "./components/MineLayout/MineLayout";
 export async function login(response, token) {
   //set the cookie
 
-  const expires = new Date(Date.now() + 3000 * 1000); //this is the expiration date of the cookie
+  const expires = new Date(Date.now() + 30 * 60 * 1000); //this is the expiration date of the cookie
+
+  // cookie expires in 5 minutes
 
   await response.cookies.set("token", token, {
     path: "/",
@@ -38,7 +40,7 @@ export async function updateSession(request) {
   }
   if (!token) return;
 
-  const expires = new Date(Date.now() + 3000 * 1000);
+  const expires = new Date(Date.now() + 30 * 60 * 1000);
   const resp = NextResponse.next();
   resp.cookies.set({
     name: "token",
