@@ -6,18 +6,22 @@ import { getSessions } from "@/app/actions";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const CrapIdLayout = ({ data }) => {
+const CrapIdLayout = ({ data, id }) => {
   const router = useRouter();
   const crap = data.data;
-  const [showForm, setShowForm] = useState(false);
+  const [isOwner, setIsOwner] = useState(true);
+
+  console.log(crap);
+  console.log(crap.owner);
+  console.log(crap.owner._id);
 
   useEffect(() => {
-    if (crap.status === "AVAILABLE") {
+    if (crap._id !== id) {
       return;
-    } else if (crap.status === "INTERESTED") {
-      setShowForm(true);
+    } else {
+      setIsOwner(false);
     }
-  }, [crap.status]);
+  }, [id, crap._id]);
 
   const deleteCrap = async () => {
     const base =
@@ -27,6 +31,10 @@ const CrapIdLayout = ({ data }) => {
 
     const token = await getSessions();
 
+    if (crap.owner !== token?.value) {
+      return;
+    }
+
     await fetch(`${base}api/crapId?token=${token?.value}&id=${crap._id}`, {
       method: "DELETE",
       headers: {
@@ -34,13 +42,19 @@ const CrapIdLayout = ({ data }) => {
       },
     });
 
+    if (crap.owner !== crap._id) {
+      return;
+    }
+
     return router.push("/mine");
   };
 
   return (
     <div>
       <div className={styles.container}>
-        {showForm && (
+        {isOwner ? (
+          <button>INTERESTED</button>
+        ) : (
           <form className={styles.form}>
             <div className={styles.formBox}>
               <label className={styles.label} htmlFor="address">
@@ -74,7 +88,7 @@ const CrapIdLayout = ({ data }) => {
           </form>
         )}
 
-        {!showForm && (
+        {isOwner && (
           <div>
             <p>No one has shown interest in this crap</p>
           </div>
@@ -98,11 +112,15 @@ const CrapIdLayout = ({ data }) => {
             />
           </div>
 
-          <div>
-            <button className={styles.delete} onClick={deleteCrap}>
-              Delete this crap
-            </button>
-          </div>
+          {isOwner ? (
+            "Only the owner can delete this crap."
+          ) : (
+            <div>
+              <button className={styles.delete} onClick={deleteCrap}>
+                Delete this crap
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

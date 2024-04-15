@@ -23,16 +23,16 @@ export default async function page({ params }) {
     );
     const data = await getResp.json();
 
-    await fetch(`${base}api/crapId?token=${token?.value}&id=${id}`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token?.value}`,
-      },
-    });
+    // await fetch(`${base}api/crapId?token=${token?.value}&id=${id}`, {
+    //   method: "POST",
+    //   headers: {
+    //     Authorization: `Bearer ${token?.value}`,
+    //   },
+    // });
 
     return (
       <>
-        <CrapIdLayout data={data} />
+        <CrapIdLayout data={data} id={token?.value} />
       </>
     );
   } catch (error) {
