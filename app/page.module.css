@@ -31,7 +31,7 @@
   gap: 1rem;
 }
 
-.formBox {
+.formBox:not(:last-child) {
   border: 2px solid var(--dominant-color);
   padding: 1rem;
 }

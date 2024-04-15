@@ -4,11 +4,20 @@ import { useRouter } from "next/navigation";
 import styles from "./CrapIdLayout.module.css";
 import Image from "next/image";
 import { getSessions } from "@/app/actions";
+import { useEffect, useState } from "react";
 
 const CrapIdLayout = ({ data }) => {
-  const crap = data.data;
-  console.log(crap);
   const router = useRouter();
+  const crap = data.data;
+  const [showForm, setShowForm] = useState(false);
+
+  useEffect(() => {
+    if (crap.status === "AVAILABLE") {
+      return;
+    } else if (crap.status === "INTERESTED") {
+      setShowForm(true);
+    }
+  }, [crap.status]);
 
   const deleteCrap = async () => {
     const base =
@@ -18,17 +27,12 @@ const CrapIdLayout = ({ data }) => {
 
     const token = await getSessions();
 
-    const resp = await fetch(
-      `${base}api/delete?token=${token?.value}&id=${crap._id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token?.value}`,
-        },
-      }
-    );
-
-    const data = await resp.json();
+    await fetch(`${base}api/crapId?token=${token?.value}&id=${crap._id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token?.value}`,
+      },
+    });
 
     return router.push("/mine");
   };
@@ -36,41 +40,49 @@ const CrapIdLayout = ({ data }) => {
   return (
     <div>
       <div className={styles.container}>
-        <form className={styles.form}>
-          <div className={styles.formBox}>
-            <label className={styles.label} htmlFor="address">
-              Pickup Address:
-            </label>
-            <input
-              className={styles.inputField}
-              type="text"
-              placeholder="Address"
-              name="address"
-            />
-          </div>
-          <div className={styles.formBox}>
-            <label className={styles.label} htmlFor="title">
-              Pickup Date:
-            </label>
-            <input className={styles.inputField} type="date" name="date" />
-          </div>
-          <div className={styles.formBox}>
-            <label className={styles.label} htmlFor="title">
-              Pickup Time:
-            </label>
-            <input className={styles.inputField} type="time" name="time" />
-          </div>
+        {showForm && (
+          <form className={styles.form}>
+            <div className={styles.formBox}>
+              <label className={styles.label} htmlFor="address">
+                Pickup Address:
+              </label>
+              <input
+                className={styles.inputField}
+                type="text"
+                placeholder="Address"
+                name="address"
+              />
+            </div>
+            <div className={styles.formBox}>
+              <label className={styles.label} htmlFor="title">
+                Pickup Date:
+              </label>
+              <input className={styles.inputField} type="date" name="date" />
+            </div>
+            <div className={styles.formBox}>
+              <label className={styles.label} htmlFor="title">
+                Pickup Time:
+              </label>
+              <input className={styles.inputField} type="time" name="time" />
+            </div>
 
-          <div className={styles.formBox}>
-            <button className={styles.submit} type="submit">
-              Suggest pickup time and location
-            </button>
+            <div className={styles.formBox}>
+              <button className={styles.submit} type="submit">
+                Suggest pickup time and location
+              </button>
+            </div>
+          </form>
+        )}
+
+        {!showForm && (
+          <div>
+            <p>No one has shown interest in this crap</p>
           </div>
-        </form>
+        )}
 
         <div className={styles.card}>
           <div className={styles.cardTitle}>
-            {crap.title} - {crap.status}
+            {crap.title} - [{crap.status}]
           </div>
 
           <div className={styles.cardContent}>{crap.description}</div>
