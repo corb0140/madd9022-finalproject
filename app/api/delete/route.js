@@ -1,6 +1,8 @@
-export async function GET(req) {
+export async function DELETE(req) {
   const req_url = new URL(req.url);
+
   const token = req_url.searchParams.get("token");
+  const id = req_url.searchParams.get("id");
 
   try {
     const base =
@@ -8,12 +10,11 @@ export async function GET(req) {
         ? "http://localhost:4000"
         : "https://madd9124-finalproject.onrender.com";
 
-    const resp = await fetch(`${base}/api/crap/mine`, {
-      method: "GET",
+    const resp = await fetch(`${base}/api/crap/${id}`, {
+      method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      next: { revalidate: 0 },
     });
     const data = await resp.json();
 

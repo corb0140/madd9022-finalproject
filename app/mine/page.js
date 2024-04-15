@@ -2,6 +2,8 @@ import MineLayout from "../components/MineLayout/MineLayout";
 
 import { getSessions } from "@/app/actions";
 
+export const fetchCache = "force-no-store";
+
 export default async function page() {
   try {
     let token = await getSessions();
@@ -26,7 +28,6 @@ export default async function page() {
       </div>
     );
   } catch (error) {
-  } finally {
-    console.log("completed");
+    console.error(error);
   }
 }

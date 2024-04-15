@@ -19,7 +19,7 @@ const OfferLayout = () => {
           </div>
 
           <div className={styles.formBox}>
-            <label className={styles.label} htmlFor="1000meters">
+            <label className={styles.label} htmlFor="description">
               Description:
             </label>
             <textarea
@@ -32,13 +32,12 @@ const OfferLayout = () => {
           </div>
 
           <div className={styles.formBox}>
-            <label className={styles.label} htmlFor="title">
+            <label className={styles.label} htmlFor="image">
               Image:
             </label>
             <input
               className={styles.image}
               type="file"
-              placeholder="title"
               name="image"
               accept="image/*"
             />
