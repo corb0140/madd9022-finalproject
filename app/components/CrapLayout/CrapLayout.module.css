@@ -1,0 +1,54 @@
+.container {
+  width: min(65em, 100%);
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+}
+
+.cardList {
+  --cols: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: 1rem;
+
+  margin: 0;
+  padding: 0.35rem;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 20%;
+}
+
+.card div {
+  color: var(--off-white-color);
+  padding: 1rem;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: var(--dominant-color);
+}
+
+.cardDescription {
+  font-size: 1rem;
+  background-color: var(--secondary-color);
+}
+
+@media screen and (min-wdith: 45em) {
+  .cardList {
+    --cols: 2;
+  }
+}
+
+@media screen and (min-wdith: 60em) {
+  .cardList {
+    --cols: 3;
+  }
+}
