@@ -9,6 +9,8 @@ export default async function page({ params }) {
 
   try {
     const token = await getSessions();
+    let json = atob(token?.value.split(".")[1]);
+    let owner = JSON.parse(json);
 
     const base =
       process.env.NODE_ENV === "development"
@@ -32,7 +34,7 @@ export default async function page({ params }) {
 
     return (
       <>
-        <CrapIdLayout data={data} id={token?.value} />
+        <CrapIdLayout data={data} id={owner.id} />
       </>
     );
   } catch (error) {

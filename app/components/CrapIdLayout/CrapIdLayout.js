@@ -11,17 +11,16 @@ const CrapIdLayout = ({ data, id }) => {
   const crap = data.data;
   const [isOwner, setIsOwner] = useState(true);
 
-  console.log(crap);
-  console.log(crap.owner);
+  console.log(id);
   console.log(crap.owner._id);
 
   useEffect(() => {
-    if (crap._id !== id) {
+    if (crap.owner._id !== id) {
       return;
     } else {
       setIsOwner(false);
     }
-  }, [id, crap._id]);
+  }, [id, crap.owner._id]);
 
   const deleteCrap = async () => {
     const base =
@@ -31,7 +30,7 @@ const CrapIdLayout = ({ data, id }) => {
 
     const token = await getSessions();
 
-    if (crap.owner !== token?.value) {
+    if (crap.owner._id !== id) {
       return;
     }
 
