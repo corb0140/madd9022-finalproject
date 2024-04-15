@@ -1,4 +1,4 @@
-/* GET */
+/* GET ALL*/
 export async function GET(req) {
   const req_url = new URL(req.url);
 
@@ -61,7 +61,7 @@ export async function DELETE(req) {
   }
 }
 
-/* POST */
+/* INTERESTED POST */
 export async function POST(req) {
   const req_url = new URL(req.url);
 

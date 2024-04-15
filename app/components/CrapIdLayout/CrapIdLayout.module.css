@@ -87,3 +87,28 @@
 
   transition: background-color 0.4s;
 }
+
+.interestText {
+  margin-bottom: 0.25rem;
+}
+
+.interestBtn {
+  --btn-color: var(--dominant-color, black);
+  display: inline-block;
+  border: none;
+  border-radius: 0.25em;
+  padding: 1em 2.5em;
+  background-color: var(--btn-color);
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: inherit;
+
+  transition: box-shadow 0.4s;
+}
+
+.interestBtn:hover {
+  box-shadow: 4px 4px 10px var(--accent-color);
+}

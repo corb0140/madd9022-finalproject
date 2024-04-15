@@ -9,7 +9,9 @@ const CrapLayout = ({ data }) => {
   const navigate = (id) => {
     router.push(`/crap/${id}`);
   };
+
   const craps = data.data;
+
   return (
     <div className={styles.container}>
       <ul className={styles.cardList}>

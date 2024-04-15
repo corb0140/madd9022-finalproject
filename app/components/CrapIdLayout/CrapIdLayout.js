@@ -11,9 +11,6 @@ const CrapIdLayout = ({ data, id }) => {
   const crap = data.data;
   const [isOwner, setIsOwner] = useState(true);
 
-  console.log(id);
-  console.log(crap.owner._id);
-
   useEffect(() => {
     if (crap.owner._id !== id) {
       return;
@@ -41,18 +38,57 @@ const CrapIdLayout = ({ data, id }) => {
       },
     });
 
-    if (crap.owner !== crap._id) {
+    if (crap.owner._id !== id) {
       return;
     }
-
     return router.push("/mine");
+  };
+
+  const interested = async () => {
+    const base =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/"
+        : "https://madd9022-finalproject.vercel.app/";
+
+    const token = await getSessions();
+
+    const resp = await fetch(
+      `${base}api/crapId?token=${token?.value}&id=${crap._id}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token?.value}`,
+        },
+      }
+    );
+
+    const data = await resp.json();
+
+    router.refresh();
   };
 
   return (
     <div>
       <div className={styles.container}>
         {isOwner ? (
-          <button>INTERESTED</button>
+          <>
+            {crap.status === "AVAILABLE" ? (
+              <div>
+                <p className={styles.interestText}>
+                  Are you interested in this crap? Click the button below
+                </p>
+                <button className={styles.interestBtn} onClick={interested}>
+                  INTERESTED
+                </button>
+              </div>
+            ) : (
+              <div>
+                <p className={styles.interestText}>
+                  Waiting for seller to respond
+                </p>
+              </div>
+            )}
+          </>
         ) : (
           <form className={styles.form}>
             <div className={styles.formBox}>
@@ -87,10 +123,18 @@ const CrapIdLayout = ({ data, id }) => {
           </form>
         )}
 
-        {isOwner && (
-          <div>
-            <p>No one has shown interest in this crap</p>
-          </div>
+        {!isOwner ? (
+          <>
+            {crap.status === "AVAILABLE" ? (
+              <div>
+                <p>No one has shown interested in this crap</p>
+              </div>
+            ) : (
+              ""
+            )}
+          </>
+        ) : (
+          ""
         )}
 
         <div className={styles.card}>

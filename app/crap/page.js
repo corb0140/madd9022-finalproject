@@ -2,6 +2,8 @@ import CrapLayout from "../components/CrapLayout/CrapLayout";
 
 import { getSessions } from "@/app/actions";
 
+export const fetchCache = "force-no-store";
+
 export default async function page({ searchParams }) {
   const keyword = new URLSearchParams(searchParams).get("keyword");
   const distance = new URLSearchParams(searchParams).get("distance");

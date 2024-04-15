@@ -25,13 +25,6 @@ export default async function page({ params }) {
     );
     const data = await getResp.json();
 
-    // await fetch(`${base}api/crapId?token=${token?.value}&id=${id}`, {
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: `Bearer ${token?.value}`,
-    //   },
-    // });
-
     return (
       <>
         <CrapIdLayout data={data} id={owner.id} />
