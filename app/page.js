@@ -1,6 +1,7 @@
 import styles from "./page.module.css";
 import { redirect } from "next/navigation";
 import { getSessions } from "@/app/actions";
+import { getCrap } from "@/app/actions";
 
 export default async function Home() {
   const node_env =
@@ -32,7 +33,7 @@ export default async function Home() {
 
       {token?.value && (
         <div className={styles.container}>
-          <form className={styles.form} action="">
+          <form className={styles.form} action={getCrap}>
             <div className={styles.formBox}>
               <label className={styles.label} htmlFor="">
                 Search for Crap
@@ -41,6 +42,7 @@ export default async function Home() {
                 className={styles.searchField}
                 type="text"
                 placeholder="keyword"
+                name="keyword"
               />
             </div>
 
@@ -49,21 +51,36 @@ export default async function Home() {
 
               <div className={styles.radio}>
                 <div>
-                  <input type="radio" id="1000meters" value="1000" />
+                  <input
+                    type="radio"
+                    id="1000meters"
+                    value="1000"
+                    name="distance"
+                  />
                   <label className={styles.label} htmlFor="1000meters">
                     1000 Meters
                   </label>
                 </div>
 
                 <div>
-                  <input type="radio" id="1000meters" value="3000" />
+                  <input
+                    type="radio"
+                    id="1000meters"
+                    value="3000"
+                    name="distance"
+                  />
                   <label className={styles.label} htmlFor="3000meters">
                     3000 Meters
                   </label>
                 </div>
 
                 <div>
-                  <input type="radio" id="1000meters" value="5000" />
+                  <input
+                    type="radio"
+                    id="1000meters"
+                    value="5000"
+                    name="distance"
+                  />
                   <label className={styles.label} htmlFor="5000meters">
                     5000 Meters
                   </label>

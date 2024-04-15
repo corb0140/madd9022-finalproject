@@ -49,6 +49,15 @@ export async function updateSession(request) {
   return resp;
 }
 
+export async function getCrap(form) {
+  "use server";
+
+  const keyword = form.get("keyword");
+  const distance = form.get("distance");
+
+  redirect(`./crap?keyword=${keyword}&distance=${distance}`);
+}
+
 export async function postCrap(form) {
   "use server";
 

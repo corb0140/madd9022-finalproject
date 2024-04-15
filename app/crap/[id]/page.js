@@ -9,27 +9,25 @@ export default async function page({ params }) {
 
   try {
     const token = await getSessions();
+    let json = atob(token?.value.split(".")[1]);
+    let owner = JSON.parse(json);
 
     const base =
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/"
         : "https://madd9022-finalproject.vercel.app/";
 
-    const resp = await fetch(
+    const getResp = await fetch(
       `${base}api/crapId?token=${token?.value}&id=${id}`,
       {
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${token?.value}`,
-        },
       }
     );
-
-    const data = await resp.json();
+    const data = await getResp.json();
 
     return (
       <>
-        <CrapIdLayout data={data} />
+        <CrapIdLayout data={data} id={owner.id} />
       </>
     );
   } catch (error) {
