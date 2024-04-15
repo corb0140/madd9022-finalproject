@@ -93,3 +93,5 @@ export async function postCrap(form) {
     redirect("/mine");
   }
 }
+
+export async function makeSuggestion(form) {}

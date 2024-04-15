@@ -1,9 +1,9 @@
 import styles from "./MineCard.module.css";
 import Image from "next/image";
 
-const MineCard = ({ data }) => {
+const MineCard = ({ data, navigate }) => {
   return (
-    <li className={styles.card}>
+    <li className={styles.card} onClick={navigate}>
       <div className={styles.content}>
         <div>
           <h2 className={styles.title}>{data.title}</h2>
