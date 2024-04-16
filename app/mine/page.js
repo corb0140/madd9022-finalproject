@@ -15,9 +15,6 @@ export default async function page() {
 
     const resp = await fetch(`${base}api/mine?token=${token?.value}`, {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${token?.value}`,
-      },
     });
 
     const data = await resp.json();

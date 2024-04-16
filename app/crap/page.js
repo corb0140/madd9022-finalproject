@@ -18,12 +18,7 @@ export default async function page({ searchParams }) {
 
     const response = await fetch(
       `${base}api/crap?keyword=${keyword}&distance=${distance}&token=${token?.value}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token?.value}`,
-        },
-      }
+      { method: "GET" }
     );
 
     const data = await response.json();

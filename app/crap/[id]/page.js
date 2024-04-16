@@ -17,13 +17,13 @@ export default async function page({ params }) {
         ? "http://localhost:3000/"
         : "https://madd9022-finalproject.vercel.app/";
 
-    const getResp = await fetch(
+    const resp = await fetch(
       `${base}api/crapId?token=${token?.value}&id=${id}`,
       {
         method: "GET",
       }
     );
-    const data = await getResp.json();
+    const data = await resp.json();
 
     return (
       <>

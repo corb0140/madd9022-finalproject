@@ -43,7 +43,6 @@ export default async function Home() {
                 type="text"
                 placeholder="keyword"
                 name="keyword"
-                checked
               />
             </div>
 
