@@ -11,7 +11,6 @@ const CrapIdLayout = ({ data, id }) => {
   const crap = data.data;
   const [notOwner, setNotOwner] = useState(true);
 
-  console.log(crap);
   useEffect(() => {
     if (crap.owner._id !== id) {
       return;
@@ -20,13 +19,13 @@ const CrapIdLayout = ({ data, id }) => {
     }
   }, [id, crap.owner._id]);
 
+  const base =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/"
+      : "https://madd9022-finalproject.vercel.app/";
+
   // DELETE FUNCTION
   const deleteCrap = async () => {
-    const base =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000/"
-        : "https://madd9022-finalproject.vercel.app/";
-
     const token = await getSessions();
 
     await fetch(`${base}api/crapId?token=${token?.value}&id=${crap._id}`, {
@@ -38,14 +37,31 @@ const CrapIdLayout = ({ data, id }) => {
 
   // INTERESTED FUNCTION
   const interested = async () => {
-    const base =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000/"
-        : "https://madd9022-finalproject.vercel.app/";
-
     const token = await getSessions();
 
     await fetch(`${base}api/crapId?token=${token?.value}&id=${crap._id}`, {
+      method: "POST",
+    });
+
+    router.refresh();
+  };
+
+  //AGREED FUNCTION
+  const agree = async () => {
+    const token = await getSessions();
+
+    await fetch(`${base}api/agree?token=${token?.value}&id=${crap._id}`, {
+      method: "POST",
+    });
+
+    router.refresh();
+  };
+
+  //DISAGREED FUNCTION
+  const disagree = async () => {
+    const token = await getSessions();
+
+    await fetch(`${base}api/disagree?token=${token?.value}&id=${crap._id}`, {
       method: "POST",
     });
 
@@ -71,12 +87,18 @@ const CrapIdLayout = ({ data, id }) => {
             ) : (
               <div>
                 {crap.status === "SCHEDULED" ? (
-                  <>
+                  <div className={styles.scheduledContainer}>
                     <p className={styles.interestText}>Agree to meet up time</p>
-                    <button className={styles.interestBtn} onClick={interested}>
-                      AGREED
-                    </button>
-                  </>
+
+                    <div className={styles.btnContainer}>
+                      <button className={styles.agreeBtn} onClick={agree}>
+                        Agree
+                      </button>
+                      <button className={styles.disagreeBtn} onClick={disagree}>
+                        Disagree
+                      </button>
+                    </div>
+                  </div>
                 ) : (
                   <p className={styles.interestText}>
                     Waiting for seller to respond
