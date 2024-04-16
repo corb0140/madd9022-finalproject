@@ -18,7 +18,7 @@ const CrapLayout = ({ data, token }) => {
         {craps.length > 0 &&
           craps.map((crap) => {
             return (
-              <div
+              <li
                 className={styles.card}
                 key={crap._id}
                 onClick={() => navigate(crap._id)}
@@ -26,7 +26,7 @@ const CrapLayout = ({ data, token }) => {
                 <div className={styles.cardTitle}>{crap.title}</div>
                 <div className={styles.cardDescription}>{crap.description}</div>
                 {token === crap.owner._id && "This is your crap"}
-              </div>
+              </li>
             );
           })}
       </ul>

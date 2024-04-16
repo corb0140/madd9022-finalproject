@@ -68,6 +68,17 @@ const CrapIdLayout = ({ data, id }) => {
     router.refresh();
   };
 
+  //FLUSHED FUNCTION
+  const flushed = async () => {
+    const token = await getSessions();
+
+    await fetch(`${base}api/flush?token=${token?.value}&id=${crap._id}`, {
+      method: "POST",
+    });
+
+    router.push("/wiped");
+  };
+
   return (
     <div>
       {/* DISPLAY FORM OR INTEREST BUTTON BASED ON BUYER OR SELLER */}
@@ -86,6 +97,7 @@ const CrapIdLayout = ({ data, id }) => {
               </div>
             ) : (
               <div>
+                {/* SHOW AGREE & DISAGREE BUTTONS IF CRAP IS SCHEDULED */}
                 {crap.status === "SCHEDULED" ? (
                   <div className={styles.scheduledContainer}>
                     <p className={styles.interestText}>Agree to meet up time</p>
@@ -100,9 +112,16 @@ const CrapIdLayout = ({ data, id }) => {
                     </div>
                   </div>
                 ) : (
-                  <p className={styles.interestText}>
-                    Waiting for seller to respond
-                  </p>
+                  <>
+                    {/* CHANGE MESSAGE BASED ON AGREE OR DISAGREE */}
+                    {crap.status === "AGREED" ? (
+                      "Thank you for taking my crap"
+                    ) : (
+                      <p className={styles.interestText}>
+                        Waiting for seller to respond
+                      </p>
+                    )}
+                  </>
                 )}
               </div>
             )}
@@ -158,8 +177,17 @@ const CrapIdLayout = ({ data, id }) => {
             {crap.status === "SCHEDULED" && (
               <div>
                 <p>Address: {crap.suggestion.address}</p>
-                <p>Date: {crap.suggestion.date}</p>
+                <p>Date: {crap.suggestion.date.split("T")[0]}</p>
                 <p>Time: {crap.suggestion.time}</p>
+              </div>
+            )}
+
+            {/* IF STATUS IS AGREED, DISPLAY AGREED BUTTON */}
+            {crap.status === "AGREED" && (
+              <div>
+                <button className={styles.flushBtn} onClick={flushed}>
+                  Flush this crap
+                </button>
               </div>
             )}
           </>
