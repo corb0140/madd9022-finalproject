@@ -85,8 +85,8 @@ const CrapIdLayout = ({ data, id }) => {
       <div className={styles.container}>
         {notOwner ? (
           <>
-            {/* IF AVAILABLE SHOW INTERESTED BUTTON. IF NOT, SHOW WAITING MESSAGE */}
-            {crap.status === "AVAILABLE" ? (
+            {/* IF AVAILABLE, SHOW INTERESTED BUTTON */}
+            {crap.status === "AVAILABLE" && (
               <div>
                 <p className={styles.interestText}>
                   Are you interested in this crap? Click the button below
@@ -95,36 +95,34 @@ const CrapIdLayout = ({ data, id }) => {
                   INTERESTED
                 </button>
               </div>
-            ) : (
-              <div>
-                {/* SHOW AGREE & DISAGREE BUTTONS IF CRAP IS SCHEDULED */}
-                {crap.status === "SCHEDULED" ? (
-                  <div className={styles.scheduledContainer}>
-                    <p className={styles.interestText}>Agree to meet up time</p>
-
-                    <div className={styles.btnContainer}>
-                      <button className={styles.agreeBtn} onClick={agree}>
-                        Agree
-                      </button>
-                      <button className={styles.disagreeBtn} onClick={disagree}>
-                        Disagree
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    {/* CHANGE MESSAGE BASED ON AGREE OR DISAGREE */}
-                    {crap.status === "AGREED" ? (
-                      "Thank you for taking my crap"
-                    ) : (
-                      <p className={styles.interestText}>
-                        Waiting for seller to respond
-                      </p>
-                    )}
-                  </>
-                )}
-              </div>
             )}
+
+            {/* SHOW AGREE & DISAGREE BUTTONS IF CRAP IS SCHEDULED */}
+            <div>
+              {crap.status === "SCHEDULED" && (
+                <div className={styles.scheduledContainer}>
+                  <p className={styles.interestText}>Agree to meet up time</p>
+
+                  <div className={styles.btnContainer}>
+                    <button className={styles.agreeBtn} onClick={agree}>
+                      Agree
+                    </button>
+                    <button className={styles.disagreeBtn} onClick={disagree}>
+                      Disagree
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* CHANGE MESSAGE BASED ON AGREE OR DISAGREE */}
+              {crap.status === "AGREED" ? (
+                "Thank you for taking my crap"
+              ) : (
+                <p className={styles.interestText}>
+                  Waiting for seller to respond
+                </p>
+              )}
+            </div>
           </>
         ) : (
           <>

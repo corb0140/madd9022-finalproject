@@ -58,7 +58,7 @@ export default async function Home() {
                     name="distance"
                     required
                   />
-                  <label className={styles.label} htmlFor="1000meters">
+                  <label className={styles.label} htmlFor="10000meters">
                     10000 Meters
                   </label>
                 </div>
@@ -71,7 +71,7 @@ export default async function Home() {
                     name="distance"
                     required
                   />
-                  <label className={styles.label} htmlFor="3000meters">
+                  <label className={styles.label} htmlFor="30000meters">
                     30000 Meters
                   </label>
                 </div>
@@ -80,11 +80,11 @@ export default async function Home() {
                   <input
                     type="radio"
                     id="50000meters"
-                    value="500000000000"
+                    value="50000"
                     name="distance"
                     required
                   />
-                  <label className={styles.label} htmlFor="5000meters">
+                  <label className={styles.label} htmlFor="50000meters">
                     50000 Meters
                   </label>
                 </div>

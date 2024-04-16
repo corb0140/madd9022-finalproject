@@ -7,9 +7,6 @@ import { useRouter } from "next/navigation";
 const MineLayout = ({ craps, owner }) => {
   const router = useRouter();
 
-  console.log(craps.data[0]);
-  console.log(owner);
-
   const navigate = (id) => {
     router.push(`/crap/${id}`);
   };

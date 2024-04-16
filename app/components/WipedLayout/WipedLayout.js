@@ -4,19 +4,25 @@ import Image from "next/image";
 const WipedLayout = ({ data }) => {
   const wipedData = data.data;
 
-  console.log(wipedData);
+  if (!wipedData || wipedData.length === 0) {
+    return (
+      <div className={styles.container}>
+        <p>There is no flushed crap</p>
+      </div>
+    );
+  }
 
   return (
-    <div>
+    <div className={styles.container}>
       <ul className={styles.cardList}>
         {wipedData.length > 0 &&
           wipedData.map((crap, index) => (
             <>
               {crap.status === "FLUSHED" && (
                 <li key={index} className={styles.card}>
-                  <h1>{crap.title}</h1>
-                  <p>{crap.status}</p>
-                  <p>{crap.description}</p>
+                  <h1 className={styles.title}>{crap.title}</h1>
+                  <p className={styles.status}>{crap.status}</p>
+                  <p className={styles.description}>{crap.description}</p>
 
                   <Image
                     className={styles.image}

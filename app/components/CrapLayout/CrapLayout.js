@@ -12,6 +12,14 @@ const CrapLayout = ({ data, token }) => {
 
   const craps = data.data;
 
+  if (!craps || craps.length === 0) {
+    return (
+      <div className={styles.container}>
+        <p>No crap to show</p>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <ul className={styles.cardList}>
