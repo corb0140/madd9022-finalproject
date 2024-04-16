@@ -73,8 +73,8 @@ export async function postCrap(form) {
 
     const base =
       process.env.NODE_ENV === "development"
-        ? "http://localhost:4000"
-        : "https://madd9124-finalproject.onrender.com";
+        ? "http://localhost:3000"
+        : "https://vercel.com/madd9022/finalproject";
 
     const res = await fetch(`${base}/api/geo`);
 

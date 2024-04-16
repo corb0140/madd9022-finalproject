@@ -88,7 +88,7 @@ const CrapIdLayout = ({ data, id }) => {
             {/* IF AVAILABLE, SHOW INTERESTED BUTTON */}
             {crap.status === "AVAILABLE" && (
               <div>
-                <p className={styles.interestText}>
+                <p className={styles.suggestionText}>
                   Are you interested in this crap? Click the button below
                 </p>
                 <button className={styles.interestBtn} onClick={interested}>
@@ -101,7 +101,15 @@ const CrapIdLayout = ({ data, id }) => {
             <div>
               {crap.status === "SCHEDULED" && (
                 <div className={styles.scheduledContainer}>
-                  <p className={styles.interestText}>Agree to meet up time</p>
+                  <p className={styles.suggestionText}>
+                    Address: {crap.suggestion.address}
+                  </p>
+                  <p className={styles.suggestionText}>
+                    Date: {crap.suggestion.date.split("T")[0]}
+                  </p>
+                  <p className={styles.suggestionText}>
+                    Time: {crap.suggestion.time}
+                  </p>
 
                   <div className={styles.btnContainer}>
                     <button className={styles.agreeBtn} onClick={agree}>
@@ -115,10 +123,23 @@ const CrapIdLayout = ({ data, id }) => {
               )}
 
               {/* CHANGE MESSAGE BASED ON AGREE OR DISAGREE */}
-              {crap.status === "AGREED" ? (
-                "Thank you for taking my crap"
-              ) : (
-                <p className={styles.interestText}>
+              {crap.status === "AGREED" && (
+                <div>
+                  <p className={styles.suggestionText}>
+                    Address: {crap.suggestion.address}
+                  </p>
+                  <p className={styles.suggestionText}>
+                    Date: {crap.suggestion.date.split("T")[0]}
+                  </p>
+                  <p className={styles.suggestionText}>
+                    Time: {crap.suggestion.time}
+                  </p>
+                </div>
+              )}
+
+              {/* WAIT MESSAGE IF INTERESTED */}
+              {crap.status === "INTERESTED" && (
+                <p className={styles.suggestionText}>
                   Waiting for seller to respond
                 </p>
               )}
@@ -174,9 +195,15 @@ const CrapIdLayout = ({ data, id }) => {
             {/* IF STATUS IS SCHEDULED, DISPLAY SUGGESTION DATA */}
             {crap.status === "SCHEDULED" && (
               <div>
-                <p>Address: {crap.suggestion.address}</p>
-                <p>Date: {crap.suggestion.date.split("T")[0]}</p>
-                <p>Time: {crap.suggestion.time}</p>
+                <p className={styles.suggestionText}>
+                  Address: {crap.suggestion.address}
+                </p>
+                <p className={styles.suggestionText}>
+                  Date: {crap.suggestion.date.split("T")[0]}
+                </p>
+                <p className={styles.suggestionText}>
+                  Time: {crap.suggestion.time}
+                </p>
               </div>
             )}
 
