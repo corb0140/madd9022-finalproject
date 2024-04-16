@@ -7,6 +7,8 @@ export const fetchCache = "force-no-store";
 export default async function page() {
   try {
     let token = await getSessions();
+    let json = atob(token?.value.split(".")[1]);
+    let owner = JSON.parse(json);
 
     const base =
       process.env.NODE_ENV === "development"
@@ -21,7 +23,7 @@ export default async function page() {
 
     return (
       <div>
-        <MineLayout craps={data} />
+        <MineLayout craps={data} owner={owner.id} />
       </div>
     );
   } catch (error) {
