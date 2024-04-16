@@ -71,38 +71,40 @@ const MineLayout = ({ craps, owner }) => {
             crapsData.map((crap) => {
               return (
                 <>
-                  {crap.owner._id !== owner && crap.status !== "AVAILABLE" && (
-                    <div key={crap._id}>
-                      <li
-                        className={styles.card}
-                        onClick={() => navigate(crap._id)}
-                      >
-                        <div className={styles.content}>
-                          <div>
-                            <h2 className={styles.title}>{crap.title}</h2>
+                  {crap.owner._id !== owner &&
+                    crap.status !== "AVAILABLE" &&
+                    crap.status !== "FLUSHED" && (
+                      <div key={crap._id}>
+                        <li
+                          className={styles.card}
+                          onClick={() => navigate(crap._id)}
+                        >
+                          <div className={styles.content}>
+                            <div>
+                              <h2 className={styles.title}>{crap.title}</h2>
+                            </div>
+
+                            <div>
+                              <p className={styles.status}>{crap.status}</p>
+                              <p className={styles.description}>
+                                {crap.description}
+                              </p>
+                            </div>
                           </div>
 
-                          <div>
-                            <p className={styles.status}>{crap.status}</p>
-                            <p className={styles.description}>
-                              {crap.description}
-                            </p>
+                          <div className={styles.imageBox}>
+                            <Image
+                              className={styles.image}
+                              src={crap.images[0]}
+                              alt={crap.title}
+                              width={200}
+                              height={200}
+                              style={{ objectFit: "cover" }}
+                            />
                           </div>
-                        </div>
-
-                        <div className={styles.imageBox}>
-                          <Image
-                            className={styles.image}
-                            src={crap.images[0]}
-                            alt={crap.title}
-                            width={200}
-                            height={200}
-                            style={{ objectFit: "cover" }}
-                          />
-                        </div>
-                      </li>
-                    </div>
-                  )}
+                        </li>
+                      </div>
+                    )}
                 </>
               );
             })}
