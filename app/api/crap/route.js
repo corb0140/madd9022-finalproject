@@ -8,11 +8,11 @@ export async function GET(req) {
   try {
     const base =
       process.env.NODE_ENV === "development"
-        ? "http://localhost:4000/"
-        : "https://madd9022-finalproject.vercel.app/";
+        ? "http://localhost:4000"
+        : "https://madd9124-finalproject.onrender.com";
 
     const resp = await fetch(
-      `${base}api/crap?query=${keyword}&distance=${distance}&long=45.44&lat=46.87&show_taken=true`,
+      `${base}/api/crap?query=${keyword}&distance=${distance}&long=45.44&lat=46.87&show_taken=true`,
       {
         method: "GET",
         headers: {
