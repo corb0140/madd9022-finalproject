@@ -2,23 +2,25 @@
 
 import styles from "./CrapIdLayout.module.css";
 import Image from "next/image";
-import { getSessions } from "@/app/actions";
+import { getSessions, makeSuggestion } from "@/app/actions";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const CrapIdLayout = ({ data, id }) => {
   const router = useRouter();
   const crap = data.data;
-  const [isOwner, setIsOwner] = useState(true);
+  const [notOwner, setNotOwner] = useState(true);
 
+  console.log(crap);
   useEffect(() => {
     if (crap.owner._id !== id) {
       return;
     } else {
-      setIsOwner(false);
+      setNotOwner(false);
     }
   }, [id, crap.owner._id]);
 
+  // DELETE FUNCTION
   const deleteCrap = async () => {
     const base =
       process.env.NODE_ENV === "development"
@@ -27,23 +29,14 @@ const CrapIdLayout = ({ data, id }) => {
 
     const token = await getSessions();
 
-    if (crap.owner._id !== id) {
-      return;
-    }
-
     await fetch(`${base}api/crapId?token=${token?.value}&id=${crap._id}`, {
       method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token?.value}`,
-      },
     });
 
-    if (crap.owner._id !== id) {
-      return;
-    }
     return router.push("/mine");
   };
 
+  // INTERESTED FUNCTION
   const interested = async () => {
     const base =
       process.env.NODE_ENV === "development"
@@ -52,26 +45,20 @@ const CrapIdLayout = ({ data, id }) => {
 
     const token = await getSessions();
 
-    const resp = await fetch(
-      `${base}api/crapId?token=${token?.value}&id=${crap._id}`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token?.value}`,
-        },
-      }
-    );
-
-    const data = await resp.json();
+    await fetch(`${base}api/crapId?token=${token?.value}&id=${crap._id}`, {
+      method: "POST",
+    });
 
     router.refresh();
   };
 
   return (
     <div>
+      {/* DISPLAY FORM OR INTEREST BUTTON BASED ON BUYER OR SELLER */}
       <div className={styles.container}>
-        {isOwner ? (
+        {notOwner ? (
           <>
+            {/* IF AVAILABLE SHOW INTERESTED BUTTON. IF NOT, SHOW WAITING MESSAGE */}
             {crap.status === "AVAILABLE" ? (
               <div>
                 <p className={styles.interestText}>
@@ -90,40 +77,65 @@ const CrapIdLayout = ({ data, id }) => {
             )}
           </>
         ) : (
-          <form className={styles.form}>
-            <div className={styles.formBox}>
-              <label className={styles.label} htmlFor="address">
-                Pickup Address:
-              </label>
-              <input
-                className={styles.inputField}
-                type="text"
-                placeholder="Address"
-                name="address"
-              />
-            </div>
-            <div className={styles.formBox}>
-              <label className={styles.label} htmlFor="title">
-                Pickup Date:
-              </label>
-              <input className={styles.inputField} type="date" name="date" />
-            </div>
-            <div className={styles.formBox}>
-              <label className={styles.label} htmlFor="title">
-                Pickup Time:
-              </label>
-              <input className={styles.inputField} type="time" name="time" />
-            </div>
+          <>
+            {/* IF STATUS INTERESTED, DISPLAY FORM.*/}
+            {crap.status === "INTERESTED" && (
+              <form className={styles.form} action={makeSuggestion}>
+                <input type="hidden" name="id" value={crap._id} />
+                <div className={styles.formBox}>
+                  <label className={styles.label} htmlFor="address">
+                    Pickup Address:
+                  </label>
+                  <input
+                    className={styles.inputField}
+                    type="text"
+                    placeholder="address"
+                    name="address"
+                  />
+                </div>
+                <div className={styles.formBox}>
+                  <label className={styles.label} htmlFor="date">
+                    Pickup Date:
+                  </label>
+                  <input
+                    className={styles.inputField}
+                    type="date"
+                    name="date"
+                  />
+                </div>
+                <div className={styles.formBox}>
+                  <label className={styles.label} htmlFor="time">
+                    Pickup Time:
+                  </label>
+                  <input
+                    className={styles.inputField}
+                    type="time"
+                    name="time"
+                    placeholder="00:00 AM/PM"
+                  />
+                </div>
 
-            <div className={styles.formBox}>
-              <button className={styles.submit} type="submit">
-                Suggest pickup time and location
-              </button>
-            </div>
-          </form>
+                <div className={styles.formBox}>
+                  <button className={styles.submit} type="submit">
+                    Suggest pickup time and location
+                  </button>
+                </div>
+              </form>
+            )}
+
+            {/* IF STATUS IS SCHEDULED, DISPLAY SUGGESTION DATA */}
+            {crap.status === "SCHEDULED" && (
+              <div>
+                <p>Address: {crap.suggestion.address}</p>
+                <p>Date: {crap.suggestion.date}</p>
+                <p>Time: {crap.suggestion.time}</p>
+              </div>
+            )}
+          </>
         )}
 
-        {!isOwner ? (
+        {/* MESSAGE WHEN PRODUCT IS AVAILABLE */}
+        {!notOwner ? (
           <>
             {crap.status === "AVAILABLE" ? (
               <div>
@@ -137,6 +149,7 @@ const CrapIdLayout = ({ data, id }) => {
           ""
         )}
 
+        {/* CRAP CARD */}
         <div className={styles.card}>
           <div className={styles.cardTitle}>
             {crap.title} - [{crap.status}]
@@ -155,7 +168,7 @@ const CrapIdLayout = ({ data, id }) => {
             />
           </div>
 
-          {isOwner ? (
+          {notOwner ? (
             "Only the owner can delete this crap."
           ) : (
             <div>

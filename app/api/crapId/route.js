@@ -1,4 +1,4 @@
-/* GET ALL*/
+/* GET*/
 export async function GET(req) {
   const req_url = new URL(req.url);
 

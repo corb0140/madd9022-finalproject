@@ -2,13 +2,13 @@ import CrapLayout from "../components/CrapLayout/CrapLayout";
 
 import { getSessions } from "@/app/actions";
 
-export const fetchCache = "force-no-store";
-
 export default async function page({ searchParams }) {
   const keyword = new URLSearchParams(searchParams).get("keyword");
   const distance = new URLSearchParams(searchParams).get("distance");
 
   const token = await getSessions();
+  let json = atob(token?.value.split(".")[1]);
+  let owner = JSON.parse(json);
 
   try {
     const base =
@@ -18,17 +18,12 @@ export default async function page({ searchParams }) {
 
     const response = await fetch(
       `${base}api/crap?keyword=${keyword}&distance=${distance}&token=${token?.value}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token?.value}`,
-        },
-      }
+      { method: "GET" }
     );
 
     const data = await response.json();
 
-    return <CrapLayout data={data} />;
+    return <CrapLayout data={data} token={owner.id} />;
   } catch (error) {
     console.error(error);
   }

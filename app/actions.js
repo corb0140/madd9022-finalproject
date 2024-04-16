@@ -58,6 +58,7 @@ export async function getCrap(form) {
   redirect(`./crap?keyword=${keyword}&distance=${distance}`);
 }
 
+// POST CRAP
 export async function postCrap(form) {
   "use server";
 
@@ -103,4 +104,36 @@ export async function postCrap(form) {
   }
 }
 
-export async function makeSuggestion(form) {}
+// POST SUGGESTION
+export async function makeSuggestion(form) {
+  "use server";
+
+  try {
+    let token = await getSessions();
+
+    const id = form.get("id");
+    const address = form.get("address");
+    const date = form.get("date");
+    const time = form.get("time");
+
+    const base_url =
+      process.env.NODE_ENV === "development"
+        ? `http://localhost:4000/api/crap`
+        : `https://madd9124-finalproject.onrender.com/api/crap`;
+
+    await fetch(`${base_url}/${id}/suggest`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token?.value}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        address: address,
+        date: date, // fix this later to remove the T04:00:00.000Z
+        time: time,
+      }),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}

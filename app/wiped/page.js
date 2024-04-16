@@ -1,3 +1,9 @@
+import WipedLayout from "../components/WipedLayout/WipedLayout";
+
 export default async function page() {
-  return <div>Wiped page</div>;
+  return (
+    <div>
+      <WipedLayout />
+    </div>
+  );
 }

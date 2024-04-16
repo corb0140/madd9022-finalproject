@@ -12,7 +12,7 @@ export async function GET(req) {
         : "https://madd9022-finalproject.vercel.app/";
 
     const resp = await fetch(
-      `${base}api/crap?query=${keyword}&distance=1000000000&long=45.44&lat=46.87&show_taken=true`,
+      `${base}api/crap?query=${keyword}&distance=${distance}&long=45.44&lat=46.87&show_taken=true`,
       {
         method: "GET",
         headers: {

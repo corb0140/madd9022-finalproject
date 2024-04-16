@@ -53,36 +53,39 @@ export default async function Home() {
                 <div>
                   <input
                     type="radio"
-                    id="1000meters"
-                    value="1000"
+                    id="10000meters"
+                    value="10000"
                     name="distance"
+                    required
                   />
                   <label className={styles.label} htmlFor="1000meters">
-                    1000 Meters
+                    10000 Meters
                   </label>
                 </div>
 
                 <div>
                   <input
                     type="radio"
-                    id="1000meters"
-                    value="3000"
+                    id="30000meters"
+                    value="30000"
                     name="distance"
+                    required
                   />
                   <label className={styles.label} htmlFor="3000meters">
-                    3000 Meters
+                    30000 Meters
                   </label>
                 </div>
 
                 <div>
                   <input
                     type="radio"
-                    id="1000meters"
-                    value="5000"
+                    id="50000meters"
+                    value="500000000000"
                     name="distance"
+                    required
                   />
                   <label className={styles.label} htmlFor="5000meters">
-                    5000 Meters
+                    50000 Meters
                   </label>
                 </div>
               </div>
