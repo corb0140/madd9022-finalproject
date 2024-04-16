@@ -70,9 +70,18 @@ const CrapIdLayout = ({ data, id }) => {
               </div>
             ) : (
               <div>
-                <p className={styles.interestText}>
-                  Waiting for seller to respond
-                </p>
+                {crap.status === "SCHEDULED" ? (
+                  <>
+                    <p className={styles.interestText}>Agree to meet up time</p>
+                    <button className={styles.interestBtn} onClick={interested}>
+                      AGREED
+                    </button>
+                  </>
+                ) : (
+                  <p className={styles.interestText}>
+                    Waiting for seller to respond
+                  </p>
+                )}
               </div>
             )}
           </>
