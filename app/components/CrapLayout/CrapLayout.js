@@ -11,7 +11,6 @@ const CrapLayout = ({ data, token }) => {
   };
 
   const craps = data.data;
-  console.log(craps);
 
   return (
     <div className={styles.container}>

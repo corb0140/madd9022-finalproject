@@ -103,4 +103,55 @@ export async function postCrap(form) {
   }
 }
 
-export async function makeSuggestion(form) {}
+export async function makeSuggestion(form) {
+  "use server";
+
+  try {
+    let token = await getSessions();
+    let json = atob(token?.value.split(".")[1]);
+    let owner = JSON.parse(json);
+
+    const address = form.get("address");
+    const date = form.get("date");
+    const time = form.get("time");
+
+    const base =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/"
+        : "https://madd9022-finalproject.vercel.app/";
+
+    const id = await fetch(`${base}api/mine?token=${token?.value}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token?.value}`,
+      },
+    });
+
+    const getData = await id.json();
+    console.log(getData.data[1]._id);
+
+    const base_url =
+      process.env.NODE_ENV === "development"
+        ? `http://localhost:4000/api/crap`
+        : `https://madd9124-finalproject.onrender.com/api/crap`;
+
+    const resp = await fetch(`${base_url}/${getData.data[1]._id}/suggest`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token?.value}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        address: address,
+        date: date,
+        time: time,
+      }),
+    });
+
+    const data = await resp.json();
+
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -2,7 +2,7 @@
 
 import styles from "./CrapIdLayout.module.css";
 import Image from "next/image";
-import { getSessions } from "@/app/actions";
+import { getSessions, makeSuggestion } from "@/app/actions";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -90,7 +90,7 @@ const CrapIdLayout = ({ data, id }) => {
             )}
           </>
         ) : (
-          <form className={styles.form}>
+          <form className={styles.form} action={makeSuggestion}>
             <div className={styles.formBox}>
               <label className={styles.label} htmlFor="address">
                 Pickup Address:
@@ -98,21 +98,26 @@ const CrapIdLayout = ({ data, id }) => {
               <input
                 className={styles.inputField}
                 type="text"
-                placeholder="Address"
+                placeholder="address"
                 name="address"
               />
             </div>
             <div className={styles.formBox}>
-              <label className={styles.label} htmlFor="title">
+              <label className={styles.label} htmlFor="date">
                 Pickup Date:
               </label>
               <input className={styles.inputField} type="date" name="date" />
             </div>
             <div className={styles.formBox}>
-              <label className={styles.label} htmlFor="title">
+              <label className={styles.label} htmlFor="time">
                 Pickup Time:
               </label>
-              <input className={styles.inputField} type="time" name="time" />
+              <input
+                className={styles.inputField}
+                type="time"
+                name="time"
+                placeholder="00:00 AM/PM"
+              />
             </div>
 
             <div className={styles.formBox}>
