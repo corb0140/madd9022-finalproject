@@ -92,7 +92,9 @@
   margin-bottom: 0.25rem;
 }
 
-.interestBtn {
+.interestBtn,
+.agreeBtn,
+.disagreeBtn {
   --btn-color: var(--dominant-color, black);
   display: inline-block;
   border: none;
@@ -109,6 +111,18 @@
   transition: box-shadow 0.4s;
 }
 
-.interestBtn:hover {
+.interestBtn:hover,
+.agreeBtn:hover,
+.disagreeBtn:hover {
   box-shadow: 4px 4px 10px var(--accent-color);
+}
+
+.scheduledCOntainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.btnContainer {
+  display: flex;
+  gap: 1rem;
 }
