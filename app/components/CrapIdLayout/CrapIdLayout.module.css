@@ -88,8 +88,8 @@
   transition: background-color 0.4s;
 }
 
-.interestText {
-  margin-bottom: 0.25rem;
+.suggestionText {
+  margin-bottom: 0.625rem;
 }
 
 .interestBtn,

@@ -71,14 +71,23 @@ export async function postCrap(form) {
     const description = form.get("description");
     const image = form.get("image");
 
+    const base =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000"
+        : "https://vercel.com/madd9022/finalproject";
+
+    const res = await fetch(`${base}/api/geo`);
+
+    const geo = await res.json();
+
     const formData = new FormData();
 
     formData.append("title", title);
     formData.append("description", description);
     formData.append("images", image);
     formData.append("owner", owner.id);
-    formData.append("location[coordinates][]", 63.33);
-    formData.append("location[coordinates][]", 33.45);
+    formData.append("location[coordinates][]", geo.lat);
+    formData.append("location[coordinates][]", geo.long);
     formData.append("status", "AVAILABLE");
 
     const base_url =
