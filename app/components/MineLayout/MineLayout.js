@@ -26,40 +26,38 @@ const MineLayout = ({ craps, owner }) => {
             crapsData.map((crap) => {
               return (
                 <>
-                  {crap.owner._id === owner &&
-                    (crap.status === "AVAILABLE" ||
-                      crap.status === "INTERESTED") && (
-                      <div key={crap._id}>
-                        <li
-                          className={styles.card}
-                          onClick={() => navigate(crap._id)}
-                        >
-                          <div className={styles.content}>
-                            <div>
-                              <h2 className={styles.title}>{crap.title}</h2>
-                            </div>
-
-                            <div>
-                              <p className={styles.status}>{crap.status}</p>
-                              <p className={styles.description}>
-                                {crap.description}
-                              </p>
-                            </div>
+                  {crap.owner._id === owner && crap.status !== "FLUSHED" && (
+                    <div key={crap._id}>
+                      <li
+                        className={styles.card}
+                        onClick={() => navigate(crap._id)}
+                      >
+                        <div className={styles.content}>
+                          <div>
+                            <h2 className={styles.title}>{crap.title}</h2>
                           </div>
 
-                          <div className={styles.imageBox}>
-                            <Image
-                              className={styles.image}
-                              src={crap.images[0]}
-                              alt={crap.title}
-                              width={200}
-                              height={200}
-                              style={{ objectFit: "cover" }}
-                            />
+                          <div>
+                            <p className={styles.status}>{crap.status}</p>
+                            <p className={styles.description}>
+                              {crap.description}
+                            </p>
                           </div>
-                        </li>
-                      </div>
-                    )}
+                        </div>
+
+                        <div className={styles.imageBox}>
+                          <Image
+                            className={styles.image}
+                            src={crap.images[0]}
+                            alt={crap.title}
+                            width={200}
+                            height={200}
+                            style={{ objectFit: "cover" }}
+                          />
+                        </div>
+                      </li>
+                    </div>
+                  )}
                 </>
               );
             })}
@@ -68,7 +66,7 @@ const MineLayout = ({ craps, owner }) => {
       {/* CRAP I AM INTERESTED IN */}
       <div className={styles.container}>
         <h2 className={styles.subheading}>Crap I am interested in</h2>
-        <div className={styles.cardList}>
+        <ul className={styles.cardList}>
           {crapsData.length > 0 &&
             crapsData.map((crap) => {
               return (
@@ -108,7 +106,7 @@ const MineLayout = ({ craps, owner }) => {
                 </>
               );
             })}
-        </div>
+        </ul>
       </div>
       ;
     </div>

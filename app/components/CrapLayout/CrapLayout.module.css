@@ -22,7 +22,7 @@
   flex-direction: column;
   justify-content: space-between;
 
-  width: 20%;
+  width: 30%;
   cursor: pointer;
 
   transition: box-shadow 0.4s;
@@ -35,6 +35,12 @@
 .card div {
   color: var(--off-white-color);
   padding: 1rem;
+}
+
+.cardTitle,
+.cardDescription {
+  word-wrap: break-word;
+  text-align: center;
 }
 
 .cardTitle {

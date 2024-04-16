@@ -94,7 +94,8 @@
 
 .interestBtn,
 .agreeBtn,
-.disagreeBtn {
+.disagreeBtn,
+.flushBtn {
   --btn-color: var(--dominant-color, black);
   display: inline-block;
   border: none;
