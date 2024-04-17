@@ -68,14 +68,17 @@ export async function postCrap(form) {
     const description = form.get("description");
     const image = form.get("image");
 
-    // const base =
-    //   process.env.NODE_ENV === "development"
-    //     ? "http://localhost:3000/"
-    //     : "https://vercel.com/madd9022/finalproject/";
+    const base =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/"
+        : "https://vercel.com/madd9022/finalproject/";
 
-    // const res = await fetch(`${base}api/geo`);
+    const res = await fetch(`${base}api/geo`);
 
-    // const geo = await res.json();
+    const geo = await res.json();
+
+    // console.log(geo.lat);
+    // console.log(geo.long);
 
     const formData = new FormData();
 
@@ -83,8 +86,8 @@ export async function postCrap(form) {
     formData.append("description", description);
     formData.append("images", image);
     formData.append("owner", owner.id);
-    formData.append("location[coordinates][]", 48.666);
-    formData.append("location[coordinates][]", 45.666);
+    formData.append("location[coordinates][]", geo.long);
+    formData.append("location[coordinates][]", geo.lat);
     formData.append("status", "AVAILABLE");
 
     const base_url =
