@@ -89,10 +89,10 @@ export async function postCrap(form) {
 
     const base_url =
       process.env.NODE_ENV === "development"
-        ? "http://localhost:4000/api/crap"
-        : "https://madd9124-finalproject.onrender.com/api/crap";
+        ? "http://localhost:4000"
+        : "https://madd9124-finalproject.onrender.com";
 
-    const resp = await fetch(`${base_url}`, {
+    const resp = await fetch(`${base_url}/api/crap`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token?.value}`,
@@ -104,7 +104,7 @@ export async function postCrap(form) {
 
     console.log(data);
   } catch (error) {
-    console.log(error);
+    return new Response(error);
   } finally {
     redirect("/mine");
   }
@@ -124,14 +124,13 @@ export async function makeSuggestion(form) {
 
     const base_url =
       process.env.NODE_ENV === "development"
-        ? `http://localhost:4000/api/crap`
-        : `https://madd9124-finalproject.onrender.com/api/crap`;
+        ? `http://localhost:4000`
+        : `https://madd9124-finalproject.onrender.com`;
 
-    await fetch(`${base_url}/${id}/suggest`, {
+    await fetch(`${base_url}/api/crap/${id}/suggest`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token?.value}`,
-        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         address: address,
