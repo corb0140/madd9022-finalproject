@@ -6,11 +6,8 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function login(response, token) {
-  //set the cookie
-
   const expires = new Date(Date.now() + 30 * 60 * 1000); //this is the expiration date of the cookie
 
-  // cookie expires in 5 minutes
   await response.cookies.set("token", token, {
     path: "/",
     secure: process.env.NODE_ENV === "production",
@@ -138,7 +135,7 @@ export async function makeSuggestion(form) {
       },
       body: JSON.stringify({
         address: address,
-        date: date, // fix this later to remove the T04:00:00.000Z
+        date: date,
         time: time,
       }),
     });
