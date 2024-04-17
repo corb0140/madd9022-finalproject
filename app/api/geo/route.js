@@ -6,11 +6,6 @@ export async function GET(req) {
     JSON.stringify({
       lat: lat,
       long: long,
-    }),
-    {
-      headers: {
-        "content-type": "application/json",
-      },
-    }
+    })
   );
 }
