@@ -73,7 +73,7 @@ export async function postCrap(form) {
         ? "http://localhost:3000/"
         : "https://vercel.com/madd9022/finalproject/";
 
-    const res = await fetch(`${base}api/geo`);
+    const res = await fetch(`https://vercel.com/madd9022/finalproject/api/geo`);
 
     const geo = await res.json();
 
@@ -92,13 +92,16 @@ export async function postCrap(form) {
         ? "http://localhost:4000"
         : "https://madd9124-finalproject.onrender.com";
 
-    const resp = await fetch(`${base_url}/api/crap`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token?.value}`,
-      },
-      body: formData,
-    });
+    const resp = await fetch(
+      `https://vercel.com/madd9022/finalproject/api/crap`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token?.value}`,
+        },
+        body: formData,
+      }
+    );
 
     const data = await resp.json();
 
