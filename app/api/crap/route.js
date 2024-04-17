@@ -1,11 +1,14 @@
 export async function GET(req) {
   const req_url = new URL(req.url);
 
-  const lat = req.geo.latitude ?? process.env.GEO_LAT;
-  const long = req.geo.longitude ?? process.env.GEO_LONG;
+  const lat = req_url.searchParams.get("lat");
+  const long = req_url.searchParams.get("long");
   const token = req_url.searchParams.get("token");
   const keyword = req_url.searchParams.get("keyword");
   const distance = req_url.searchParams.get("distance");
+
+  console.log("lat", lat);
+  console.log("long", long);
 
   try {
     const base =
@@ -14,7 +17,7 @@ export async function GET(req) {
         : "https://madd9124-finalproject.onrender.com";
 
     const resp = await fetch(
-      `${base}/api/crap?query=${keyword}&distance=${distance}&long=${long}&lat=${lat}&show_taken=true`,
+      `${base}/api/crap?query=${keyword}&distance=${distance}&long=${long}&lat=${lat}&show_taken=false`,
       {
         method: "GET",
         headers: {
