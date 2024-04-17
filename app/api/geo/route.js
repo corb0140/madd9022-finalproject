@@ -1,6 +1,6 @@
 export async function GET(req) {
-  const lat = process.env.GEO_LAT;
-  const long = process.env.GEO_LONG;
+  const lat = req.geo.latitude ?? process.env.GEO_LAT;
+  const long = req.geo.longitude ?? process.env.GEO_LONG;
 
   return new Response(
     JSON.stringify({
