@@ -20,11 +20,11 @@ const MineLayout = ({ craps, owner }) => {
 
         <ul className={styles.cardList}>
           {crapsData.length > 0 &&
-            crapsData.map((crap) => {
+            crapsData.map((crap, index) => {
               return (
                 <>
                   {crap.owner._id === owner && crap.status !== "FLUSHED" && (
-                    <div key={crap._id}>
+                    <div key={index}>
                       <li
                         className={styles.card}
                         onClick={() => navigate(crap._id)}
@@ -65,13 +65,13 @@ const MineLayout = ({ craps, owner }) => {
         <h2 className={styles.subheading}>Crap I am interested in</h2>
         <ul className={styles.cardList}>
           {crapsData.length > 0 &&
-            crapsData.map((crap) => {
+            crapsData.map((crap, index) => {
               return (
                 <>
                   {crap.owner._id !== owner &&
                     crap.status !== "AVAILABLE" &&
                     crap.status !== "FLUSHED" && (
-                      <div key={crap._id}>
+                      <div key={index}>
                         <li
                           className={styles.card}
                           onClick={() => navigate(crap._id)}

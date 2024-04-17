@@ -24,11 +24,11 @@ const CrapLayout = ({ data, token }) => {
     <div className={styles.container}>
       <ul className={styles.cardList}>
         {craps.length > 0 &&
-          craps.map((crap) => {
+          craps.map((crap, index) => {
             return (
               <li
                 className={styles.card}
-                key={crap._id}
+                key={index}
                 onClick={() => navigate(crap._id)}
               >
                 <div className={styles.cardTitle}>{crap.title}</div>
