@@ -82,12 +82,8 @@ export async function POST(req) {
     });
     const data = await resp.json();
 
-    return new Response(JSON.stringify(data), {
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+    return new Response(JSON.stringify(data));
   } catch (error) {
-    console.log(error);
+    return new Response(JSON.stringify(error));
   }
 }
