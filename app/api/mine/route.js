@@ -17,7 +17,11 @@ export async function GET(req) {
     });
     const data = await resp.json();
 
-    return new Response(JSON.stringify(data));
+    return new Response(JSON.stringify(data), {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     return new Response(JSON.stringify(error));
   }
