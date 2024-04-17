@@ -4,7 +4,7 @@ import { getSessions } from "@/app/actions";
 import { getCrap } from "@/app/actions";
 
 export default async function Home() {
-  const node_env =
+  const base =
     process.env.NODE_ENV === "development"
       ? "http://localhost:4000"
       : "https://madd9124-finalproject.onrender.com";
@@ -12,7 +12,7 @@ export default async function Home() {
   const base_url = process.env.BASE_URL;
 
   const redirectUrl = `${base_url}login`;
-  const url = `${node_env}/auth/google?redirect_url=${redirectUrl}`;
+  const url = `${base}/auth/google?redirect_url=${redirectUrl}`;
 
   let token = await getSessions();
 

@@ -4,8 +4,6 @@ import { postCrap } from "@/app/actions";
 const OfferLayout = ({ geo }) => {
   return (
     <div>
-      <div>{geo.lat}</div>
-      <div>{geo.long}</div>
       <div className={styles.container}>
         <form className={styles.form} action={postCrap}>
           <input type="hidden" name="lat" value={geo.lat} />
