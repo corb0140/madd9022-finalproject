@@ -1,5 +1,7 @@
 import CrapLayout from "../components/CrapLayout/CrapLayout";
 
+export const fetchCache = "force-no-store";
+
 import { getSessions } from "@/app/actions";
 
 export default async function page({ searchParams }) {
