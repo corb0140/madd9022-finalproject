@@ -1,9 +1,24 @@
 import OfferLayout from "../components/OfferLayout/OfferLayout";
 
 export default async function page() {
-  return (
-    <div>
-      <OfferLayout />
-    </div>
-  );
+  const base =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/"
+      : "https://madd9022-finalproject.vercel.app/";
+
+  try {
+    const resp = await fetch(`${base}api/geo`, {
+      method: "GET",
+    });
+
+    const data = await resp.json();
+
+    return (
+      <div>
+        <OfferLayout geo={data} />
+      </div>
+    );
+  } catch (error) {
+    console.error(error);
+  }
 }
