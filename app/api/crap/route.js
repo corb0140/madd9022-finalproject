@@ -1,14 +1,13 @@
 export async function GET(req) {
   const req_url = new URL(req.url);
 
-  const lat = req_url.searchParams.get("lat");
   const long = req_url.searchParams.get("long");
+  const lat = req_url.searchParams.get("lat");
   const token = req_url.searchParams.get("token");
   const keyword = req_url.searchParams.get("keyword");
   const distance = req_url.searchParams.get("distance");
 
-  console.log("lat", lat);
-  console.log("long", long);
+  console.log(long, lat);
 
   try {
     const base =

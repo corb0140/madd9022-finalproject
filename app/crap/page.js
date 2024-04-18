@@ -18,9 +18,13 @@ export default async function page({ searchParams }) {
         ? "http://localhost:3000/"
         : "https://madd9022-finalproject.vercel.app/";
 
-    const geoResp = await fetch(`${base}/api/geo`, { method: "GET" });
+    const geoResp = await fetch(`${base}/api/geo`, {
+      method: "GET",
+    });
 
     const geo = await geoResp.json();
+
+    console.log(geo);
 
     const response = await fetch(
       `${base}api/crap?keyword=${keyword}&distance=${distance}&long=${geo.long}&lat=${geo.lat}&token=${token?.value}`,
@@ -29,7 +33,7 @@ export default async function page({ searchParams }) {
 
     const data = await response.json();
 
-    return <CrapLayout data={data} token={owner.id} />;
+    return <CrapLayout data={data} owner={owner.id} />;
   } catch (error) {
     console.error(error);
   }
