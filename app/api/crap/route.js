@@ -7,8 +7,6 @@ export async function GET(req) {
   const keyword = req_url.searchParams.get("keyword");
   const distance = req_url.searchParams.get("distance");
 
-  console.log(long, lat);
-
   try {
     const base =
       process.env.NODE_ENV === "development"
@@ -22,6 +20,7 @@ export async function GET(req) {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        next: { revalidate: 0 },
       }
     );
 

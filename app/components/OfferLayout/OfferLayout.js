@@ -2,13 +2,13 @@ import styles from "./OfferLayout.module.css";
 import { postCrap } from "@/app/actions";
 
 const OfferLayout = ({ geo }) => {
-  console.log(geo);
+  // console.log(geo);
   return (
     <div>
       <div className={styles.container}>
         <form className={styles.form} action={postCrap}>
-          <input type="hidden" name="lat" value={geo.lat} />
           <input type="hidden" name="long" value={geo.long} />
+          <input type="hidden" name="lat" value={geo.lat} />
           <div className={styles.formBox}>
             <label className={styles.label} htmlFor="title">
               Title:
