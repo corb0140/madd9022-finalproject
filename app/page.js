@@ -59,7 +59,7 @@ export default async function Home() {
                     required
                   />
                   <label className={styles.label} htmlFor="10000">
-                    10 k/m
+                    10 km
                   </label>
                 </div>
 
@@ -72,7 +72,7 @@ export default async function Home() {
                     required
                   />
                   <label className={styles.label} htmlFor="30000">
-                    30 k/m
+                    30 km
                   </label>
                 </div>
 
@@ -85,7 +85,7 @@ export default async function Home() {
                     required
                   />
                   <label className={styles.label} htmlFor="50000">
-                    50 k/m
+                    50 km
                   </label>
                 </div>
               </div>
