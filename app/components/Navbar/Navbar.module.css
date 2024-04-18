@@ -28,6 +28,10 @@
   color: var(--accent-color);
 }
 
+.link:is(:focus, :active) {
+  color: var(--accent-color);
+}
+
 .logout {
   background: none;
   border: none;
