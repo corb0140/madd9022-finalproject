@@ -24,8 +24,6 @@ export default async function page({ searchParams }) {
 
     const geo = await geoResp.json();
 
-    console.log(geo);
-
     const response = await fetch(
       `${base}api/crap?keyword=${keyword}&distance=${distance}&long=${geo.long}&lat=${geo.lat}&token=${token?.value}`,
       { method: "GET" }
