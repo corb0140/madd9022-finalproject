@@ -14,7 +14,7 @@ export async function GET(req) {
         : "https://madd9124-finalproject.onrender.com";
 
     const resp = await fetch(
-      `${base}/api/crap?query=${keyword}&distance=${distance}&long=${long}&lat=${lat}&show_taken=false`,
+      `${base}/api/crap?query=${keyword}&distance=${distance}&long=${long}&lat=${lat}&show_taken=true`,
       {
         method: "GET",
         headers: {
