@@ -2,6 +2,8 @@ import WipedLayout from "../components/WipedLayout/WipedLayout";
 
 import { getSessions } from "@/app/actions";
 
+export const fetchCache = "force-no-store";
+
 export default async function page() {
   let token = await getSessions();
 

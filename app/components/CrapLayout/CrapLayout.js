@@ -3,7 +3,7 @@
 import styles from "./CrapLayout.module.css";
 import { useRouter } from "next/navigation";
 
-const CrapLayout = ({ data, token }) => {
+const CrapLayout = ({ data, owner }) => {
   const router = useRouter();
 
   const navigate = (id) => {
@@ -33,7 +33,7 @@ const CrapLayout = ({ data, token }) => {
               >
                 <div className={styles.cardTitle}>{crap.title}</div>
                 <div className={styles.cardDescription}>{crap.description}</div>
-                {token === crap.owner._id && "This is your crap"}
+                {owner === crap.owner._id && "This is your crap"}
               </li>
             );
           })}

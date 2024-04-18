@@ -2,6 +2,7 @@ import styles from "./OfferLayout.module.css";
 import { postCrap } from "@/app/actions";
 
 const OfferLayout = ({ geo }) => {
+  console.log(geo);
   return (
     <div>
       <div className={styles.container}>

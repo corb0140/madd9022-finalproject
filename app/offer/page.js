@@ -1,5 +1,7 @@
 import OfferLayout from "../components/OfferLayout/OfferLayout";
 
+export const fetchCache = "force-no-store";
+
 export default async function page() {
   const base =
     process.env.NODE_ENV === "development"
