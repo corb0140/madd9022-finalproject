@@ -115,8 +115,6 @@ export async function makeSuggestion(form) {
     const date = form.get("date");
     const time = form.get("time");
 
-    console.log(id, address, date, time);
-
     const base_url =
       process.env.NODE_ENV === "development"
         ? `http://localhost:4000`

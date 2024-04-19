@@ -4,13 +4,17 @@ import styles from "./CrapIdLayout.module.css";
 import Image from "next/image";
 import { getSessions, makeSuggestion } from "@/app/actions";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, redirect } from "next/navigation";
 
 const CrapIdLayout = ({ data, id }) => {
   const router = useRouter();
-  const crap = data.data;
 
+  const crap = data.data;
   const [notOwner, setNotOwner] = useState(true);
+
+  if (!crap) {
+    redirect("/error");
+  }
 
   useEffect(() => {
     if (crap.owner._id !== id) {
