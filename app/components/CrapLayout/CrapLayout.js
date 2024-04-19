@@ -33,7 +33,13 @@ const CrapLayout = ({ data, owner }) => {
               >
                 <div className={styles.cardTitle}>{crap.title}</div>
                 <div className={styles.cardDescription}>{crap.description}</div>
-                {owner === crap.owner._id && "This is your crap"}
+                {owner === crap.owner._id ? (
+                  <p className={styles.cardOwnerCrap}>This is your crap</p>
+                ) : (
+                  <p className={styles.cardOwnerCrap}>
+                    This is {crap.owner.name + "'s"} crap
+                  </p>
+                )}
               </li>
             );
           })}

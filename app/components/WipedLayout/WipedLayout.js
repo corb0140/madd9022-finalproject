@@ -37,9 +37,16 @@ const WipedLayout = ({ data }) => {
                   className={styles.card}
                   onClick={() => navigateToCrap(crap._id)}
                 >
-                  <h1 className={styles.title}>{crap.title}</h1>
-                  <p className={styles.status}>{crap.status}</p>
-                  <p className={styles.description}>{crap.description}</p>
+                  <div className={styles.content}>
+                    <div>
+                      <h2 className={styles.title}>{crap.title}</h2>
+                    </div>
+
+                    <div>
+                      <p className={styles.status}>{crap.status}</p>
+                      <p className={styles.description}>{crap.description}</p>
+                    </div>
+                  </div>
 
                   <Image
                     className={styles.image}

@@ -15,6 +15,8 @@
   margin: 0;
   padding: 0.35rem;
   list-style: none;
+
+  overflow: hidden;
 }
 
 .card {
@@ -22,8 +24,9 @@
   flex-direction: column;
   justify-content: space-between;
 
-  width: 30%;
   cursor: pointer;
+
+  background-color: var(--accent-color);
 
   transition: box-shadow 0.4s;
 }
@@ -54,13 +57,19 @@
   background-color: var(--secondary-color);
 }
 
-@media screen and (min-wdith: 45em) {
+.cardOwnerCrap {
+  text-align: center;
+  margin: 0;
+  padding: 0.55rem;
+}
+
+@media screen and (min-width: 45em) {
   .cardList {
     --cols: 2;
   }
 }
 
-@media screen and (min-wdith: 60em) {
+@media screen and (min-width: 60em) {
   .cardList {
     --cols: 3;
   }
