@@ -127,19 +127,22 @@ const CrapIdLayout = ({ data, owner }) => {
                 </div>
               )}
 
-              {/* CHANGE MESSAGE BASED ON AGREE OR DISAGREE */}
+              {/* IF AGREED, SHOW MESSAGE AND PICKUP INFORMATION */}
               {crap.status === "AGREED" && (
-                <div>
-                  <p className={styles.suggestionText}>
-                    Address: {crap.suggestion.address}
-                  </p>
-                  <p className={styles.suggestionText}>
-                    Date: {crap.suggestion.date.split("T")[0]}
-                  </p>
-                  <p className={styles.suggestionText}>
-                    Time: {crap.suggestion.time}
-                  </p>
-                </div>
+                <>
+                  <h2>Thank you for taking my crap</h2>
+                  <div>
+                    <p className={styles.suggestionText}>
+                      Address: {crap.suggestion.address}
+                    </p>
+                    <p className={styles.suggestionText}>
+                      Date: {crap.suggestion.date.split("T")[0]}
+                    </p>
+                    <p className={styles.suggestionText}>
+                      Time: {crap.suggestion.time}
+                    </p>
+                  </div>
+                </>
               )}
 
               {/* WAIT MESSAGE IF INTERESTED */}
@@ -211,7 +214,7 @@ const CrapIdLayout = ({ data, owner }) => {
               </div>
             )}
 
-            {/* IF STATUS IS AGREED, DISPLAY AGREED BUTTON */}
+            {/* IF STATUS IS AGREED, DISPLAY FLUSHED BUTTON */}
             {crap.status === "AGREED" && (
               <div>
                 <button className={styles.flushBtn} onClick={flushed}>
