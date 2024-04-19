@@ -1,8 +1,12 @@
+"use client";
+
 import styles from "./WipedLayout.module.css";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const WipedLayout = ({ data }) => {
   const wipedData = data.data;
+  const router = useRouter();
 
   if (!wipedData || wipedData.length === 0) {
     return (
@@ -12,6 +16,15 @@ const WipedLayout = ({ data }) => {
     );
   }
 
+  const base =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/"
+      : "https://madd9022-finalproject.vercel.app/";
+
+  const navigateToCrap = (id) => {
+    router.push(`${base}crap/${id}`);
+  };
+
   return (
     <div className={styles.container}>
       <ul className={styles.cardList}>
@@ -19,7 +32,11 @@ const WipedLayout = ({ data }) => {
           wipedData.map((crap, index) => (
             <>
               {crap.status === "FLUSHED" && (
-                <li key={index} className={styles.card}>
+                <li
+                  key={index}
+                  className={styles.card}
+                  onClick={() => navigateToCrap(crap._id)}
+                >
                   <h1 className={styles.title}>{crap.title}</h1>
                   <p className={styles.status}>{crap.status}</p>
                   <p className={styles.description}>{crap.description}</p>
