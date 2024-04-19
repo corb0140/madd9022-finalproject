@@ -47,7 +47,7 @@ export default async function Home() {
             </div>
 
             <div className={styles.formBox}>
-              <p className={styles.radioHeading}>Please enter a range with: </p>
+              <p className={styles.radioHeading}>Please select a range: </p>
 
               <div className={styles.radio}>
                 <div>
