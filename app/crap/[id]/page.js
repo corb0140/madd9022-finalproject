@@ -27,7 +27,7 @@ export default async function page({ params }) {
 
     return (
       <>
-        <CrapIdLayout data={data} id={owner.id} />
+        <CrapIdLayout data={data} owner={owner.id} />
       </>
     );
   } catch (error) {

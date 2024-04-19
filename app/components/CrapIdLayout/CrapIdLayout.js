@@ -6,7 +6,7 @@ import { getSessions, makeSuggestion } from "@/app/actions";
 import { useEffect, useState } from "react";
 import { useRouter, redirect } from "next/navigation";
 
-const CrapIdLayout = ({ data, id }) => {
+const CrapIdLayout = ({ data, owner }) => {
   const router = useRouter();
 
   const crap = data.data;
@@ -17,12 +17,12 @@ const CrapIdLayout = ({ data, id }) => {
   }
 
   useEffect(() => {
-    if (crap.owner._id !== id) {
+    if (crap.owner._id !== owner) {
       return;
     } else {
       setNotOwner(false);
     }
-  }, [id, crap.owner._id]);
+  }, [owner, crap.owner._id]);
 
   const base =
     process.env.NODE_ENV === "development"
@@ -223,18 +223,10 @@ const CrapIdLayout = ({ data, id }) => {
         )}
 
         {/* MESSAGE WHEN PRODUCT IS AVAILABLE */}
-        {!notOwner ? (
-          <>
-            {crap.status === "AVAILABLE" ? (
-              <div>
-                <p>No one has shown interested in this crap</p>
-              </div>
-            ) : (
-              ""
-            )}
-          </>
-        ) : (
-          ""
+        {!notOwner && crap.status === "AVAILABLE" && (
+          <div>
+            <p>No one has shown interested in this crap</p>
+          </div>
         )}
 
         {/* CRAP CARD */}
