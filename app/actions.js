@@ -115,6 +115,8 @@ export async function makeSuggestion(form) {
     const date = form.get("date");
     const time = form.get("time");
 
+    console.log(id, address, date, time);
+
     const base_url =
       process.env.NODE_ENV === "development"
         ? `http://localhost:4000`
@@ -124,6 +126,7 @@ export async function makeSuggestion(form) {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token?.value}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         address: address,
@@ -132,6 +135,6 @@ export async function makeSuggestion(form) {
       }),
     });
   } catch (error) {
-    console.log(error);
+    return new Response(error);
   }
 }

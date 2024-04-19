@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 const CrapIdLayout = ({ data, id }) => {
   const router = useRouter();
   const crap = data.data;
+
   const [notOwner, setNotOwner] = useState(true);
 
   useEffect(() => {
@@ -180,7 +181,6 @@ const CrapIdLayout = ({ data, id }) => {
                     className={styles.inputField}
                     type="time"
                     name="time"
-                    placeholder="00:00 AM/PM"
                   />
                 </div>
 
