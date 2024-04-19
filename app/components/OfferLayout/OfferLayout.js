@@ -17,6 +17,7 @@ const OfferLayout = ({ geo }) => {
               type="text"
               placeholder="title"
               name="title"
+              required
             />
           </div>
 
@@ -30,6 +31,7 @@ const OfferLayout = ({ geo }) => {
               rows="4"
               cols="50"
               placeholder="description"
+              required
             />
           </div>
 
@@ -42,6 +44,7 @@ const OfferLayout = ({ geo }) => {
               type="file"
               name="image"
               accept="image/*"
+              required
             />
           </div>
 

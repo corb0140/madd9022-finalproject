@@ -168,6 +168,7 @@ const CrapIdLayout = ({ data, owner }) => {
                     type="text"
                     placeholder="address"
                     name="address"
+                    required
                   />
                 </div>
                 <div className={styles.formBox}>
@@ -178,6 +179,7 @@ const CrapIdLayout = ({ data, owner }) => {
                     className={styles.inputField}
                     type="date"
                     name="date"
+                    required
                   />
                 </div>
                 <div className={styles.formBox}>
@@ -188,6 +190,7 @@ const CrapIdLayout = ({ data, owner }) => {
                     className={styles.inputField}
                     type="time"
                     name="time"
+                    required
                   />
                 </div>
 
